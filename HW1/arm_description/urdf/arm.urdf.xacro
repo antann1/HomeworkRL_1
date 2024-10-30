@@ -1,9 +1,18 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="arm">
 
+
   <material name="red">
     <color rgba="1 0 0 1"/>
   </material>
+
+  <link name="world"/>
+ 
+  <joint name="arm_base_joint" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin rpy="0.0 0 0" xyz="0 0 0"/>
+  </joint>
 
 
   <link name="base_link">
@@ -406,6 +415,7 @@
     <parameters>$(find arm_control)/config/arm_controllers.yaml</parameters>
       <controller_manager_prefix_node_name>controller_manager</controller_manager_prefix_node_name>
     </plugin>
+    <static>true</static> 
   </gazebo>
 
   <xacro:include filename="$(find arm_description)/urdf/arm_hardware_interface.xacro"/>
